@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>3 Formatting your dataset (~30mn) | Month of birth and persistence of ADHD: an IPD meta analysis</title>
+  <meta name="description" content="This book is designed to assist you in performing the data analysis for the IPD meta analysis." />
+  <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="3 Formatting your dataset (~30mn) | Month of birth and persistence of ADHD: an IPD meta analysis" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This book is designed to assist you in performing the data analysis for the IPD meta analysis." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="3 Formatting your dataset (~30mn) | Month of birth and persistence of ADHD: an IPD meta analysis" />
+  
+  <meta name="twitter:description" content="This book is designed to assist you in performing the data analysis for the IPD meta analysis." />
+  
+
+<meta name="author" content="Gosling CJ, Pinabiaux C, Caparos S, Delorme R &amp; Cortese S" />
+
+
+<meta name="date" content="2020-10-27" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="installing-r-and-r-studio-15mn.html"/>
+<link rel="next" href="perform-data-analysis-15mn.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Month of birth & ADHD</a></li>
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Forword</a></li>
+<li class="chapter" data-level="2" data-path="installing-r-and-r-studio-15mn.html"><a href="installing-r-and-r-studio-15mn.html"><i class="fa fa-check"></i><b>2</b> Installing R and R studio (~ 15mn)</a><ul>
+<li class="chapter" data-level="2.1" data-path="installing-r-and-r-studio-15mn.html"><a href="installing-r-and-r-studio-15mn.html#download-basic-r"><i class="fa fa-check"></i><b>2.1</b> Download basic R</a></li>
+<li class="chapter" data-level="2.2" data-path="installing-r-and-r-studio-15mn.html"><a href="installing-r-and-r-studio-15mn.html#download-r-studio"><i class="fa fa-check"></i><b>2.2</b> Download R Studio</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="formatting-your-dataset-30mn.html"><a href="formatting-your-dataset-30mn.html"><i class="fa fa-check"></i><b>3</b> Formatting your dataset (~30mn)</a><ul>
+<li class="chapter" data-level="3.1" data-path="formatting-your-dataset-30mn.html"><a href="formatting-your-dataset-30mn.html#raw-dataset"><i class="fa fa-check"></i><b>3.1</b> Raw dataset</a></li>
+<li class="chapter" data-level="3.2" data-path="formatting-your-dataset-30mn.html"><a href="formatting-your-dataset-30mn.html#select-appropriate-columns"><i class="fa fa-check"></i><b>3.2</b> Select appropriate columns</a></li>
+<li class="chapter" data-level="3.3" data-path="formatting-your-dataset-30mn.html"><a href="formatting-your-dataset-30mn.html#rename-columns"><i class="fa fa-check"></i><b>3.3</b> Rename columns</a></li>
+<li class="chapter" data-level="3.4" data-path="formatting-your-dataset-30mn.html"><a href="formatting-your-dataset-30mn.html#recode-values"><i class="fa fa-check"></i><b>3.4</b> Recode values</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="perform-data-analysis-15mn.html"><a href="perform-data-analysis-15mn.html"><i class="fa fa-check"></i><b>4</b> Perform data analysis (~15mn)</a><ul>
+<li class="chapter" data-level="4.1" data-path="perform-data-analysis-15mn.html"><a href="perform-data-analysis-15mn.html#how-to-use-the-script"><i class="fa fa-check"></i><b>4.1</b> How to use the script</a></li>
+<li class="chapter" data-level="4.2" data-path="perform-data-analysis-15mn.html"><a href="perform-data-analysis-15mn.html#install-the-packages"><i class="fa fa-check"></i><b>4.2</b> Install the packages</a></li>
+<li class="chapter" data-level="4.3" data-path="perform-data-analysis-15mn.html"><a href="perform-data-analysis-15mn.html#load-your-dataset"><i class="fa fa-check"></i><b>4.3</b> Load your dataset</a></li>
+<li class="chapter" data-level="4.4" data-path="perform-data-analysis-15mn.html"><a href="perform-data-analysis-15mn.html#visualize-your-dataset"><i class="fa fa-check"></i><b>4.4</b> Visualize your dataset</a></li>
+<li class="chapter" data-level="4.5" data-path="perform-data-analysis-15mn.html"><a href="perform-data-analysis-15mn.html#recode-the-dataset"><i class="fa fa-check"></i><b>4.5</b> Recode the dataset</a></li>
+<li class="chapter" data-level="4.6" data-path="perform-data-analysis-15mn.html"><a href="perform-data-analysis-15mn.html#perform-data-analysis"><i class="fa fa-check"></i><b>4.6</b> Perform data analysis</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="export-results.html"><a href="export-results.html"><i class="fa fa-check"></i><b>5</b> Export results</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Month of birth and persistence of ADHD: an IPD meta analysis</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="formatting-your-dataset-30mn" class="section level1">
+<h1><span class="header-section-number">3</span> Formatting your dataset (~30mn)</h1>
+<p>In order to run the analyses, you will need to label your columns and values as described below. This operation should be done using the software which was used to compile the data (typically Excel, Open Office, or another spreadsheet software). The examples below are given for Excel users but they could be applied to any other software.</p>
+<div id="raw-dataset" class="section level2">
+<h2><span class="header-section-number">3.1</span> Raw dataset</h2>
+<p>Open your dataset with the spreadsheet software you use. For instance:</p>
+<p><img src="IMG_raw_dataset_ADHD.png" /></p>
+</div>
+<div id="select-appropriate-columns" class="section level2">
+<h2><span class="header-section-number">3.2</span> Select appropriate columns</h2>
+<p>Only 11 columns will be required for the analysis. Here is the list:</p>
+<ol style="list-style-type: decimal">
+<li>A column containing the participant identifiers</li>
+<li>A column containing the age of participants at baseline</li>
+<li>A column containing the age of participants at follow up</li>
+<li>A column containing the follow up duration</li>
+<li>A column containing the month of birth of the participants <em>(If the birthdate of the participant is stored under a format like this (e.g., “07-11-1993” or “07/11/1993”), you can let your variable in this format but you have to inform us, so we can adapt the R code</em></li>
+<li>A column containing the diagnosis status at follow up (confirmed or not confirmed)</li>
+<li>A column containing the subtype / presentation at baseline (hyperactive/inattentive/combined)</li>
+<li>A column containing the diagnosis procedure at baseline</li>
+<li>A column containing the diagnosis procedure at follow up</li>
+<li>A column containing the psychiatric comorbidities of the participants</li>
+<li>A column containing the full-scale IQ score of the participants</li>
+</ol>
+</div>
+<div id="rename-columns" class="section level2">
+<h2><span class="header-section-number">3.3</span> Rename columns</h2>
+<p>In bold, the name that should be given to the corresponding column</p>
+<ul>
+<li>Participants identifier = <strong>ID</strong></li>
+<li>Age at baseline = <strong>agebaseline</strong></li>
+<li>Age at Follow up = <strong>agefollowup</strong></li>
+<li>Follow up duration = <strong>followupduration</strong></li>
+<li>Month of birth = <strong>month</strong></li>
+<li>Diagnosis status at follow up = <strong>diagconfirmed</strong></li>
+<li>Subtype/presentation at baseline = <strong>presentation</strong></li>
+<li>Diagnosis procedure at baseline = <strong>diagbaseline</strong></li>
+<li>Diagnosis procedure at follow up = <strong>diagfollowup</strong></li>
+<li>Psychiatric comorbidities (e.g., Autism Spectrum Disorder) = <strong>psychcomorbidity</strong></li>
+<li>Full-scale IQ score = <strong>iq</strong></li>
+</ul>
+</div>
+<div id="recode-values" class="section level2">
+<h2><span class="header-section-number">3.4</span> Recode values</h2>
+<p>We propose two solutions for recoding the values.</p>
+<ul>
+<li><p>In the first one, we propose to run a script on R that will allow us to determine how you have coded your dataset and then recode all the values automatically. If you choose this solution, refer to the point <strong>Automatic Recoding</strong> below</p></li>
+<li><p>In the second one, we propose you to recode these values yourself. To help you, we have provided details on how to do this. If you choose this solution, please refer to the point <strong>Manual Recoding</strong> below.</p></li>
+</ul>
+<p><strong>+ Automatic Recoding</strong></p>
+<p>In order to recode your dataset automatically, we need to determine how you have coded the values. To do this, please refer directly to point 3 of this document.</p>
+<p><strong>+ Manual Recoding</strong></p>
+<p>In bold, the name that should be given to the corresponding values</p>
+<ul>
+<li>Participants identifier = <strong>no constraint</strong> <em>You can identify your participants as you wish</em></li>
+<li>Age at baseline = <strong>Age in years.</strong> <em>For example, if a child was 8 years and 2 months at baseline, his</em> <strong>“agebaseline”</strong> <em>value should be: 8 + 2/12 =</em> <strong>8.17</strong></li>
+<li>Age at Follow up = <strong>Age in years.</strong> <em>For example, if a child was 11 years and 4 months at follow up, his</em> <strong>“agefollowup”</strong> <em>value should be: 11 + 4/12 =</em> <strong>11.33</strong></li>
+<li>Follow up duration = <strong>Folluw up in years.</strong> <em>For example, if a child has a follow up duration of 5 years and 8 months, his</em> <strong>followupduration</strong> <em>value should be: 5 + 8/12 =</em> <strong>5.67</strong></li>
+<li>Month of birth = <strong>Standard months names.</strong> <em>For example, january, february, march, etc… do not write the first letter in upper case (write january, not January)</em></li>
+<li>ADHD diagnosis status at follow up = <strong>confirmed or notconfirmed.</strong> <em>if the diagnosis is confirmed at follow up, the</em> <strong>“diagconfirmed”</strong> <em>value should be</em> <strong>confirmed</strong> / <em>if the diagnosis is not confirmed at follow up (i.e., participants do not longer meet ADHD criteria), the</em> <strong>“diagconfirmed”</strong> <em>value should be</em> <strong>notconfirmed</strong></li>
+<li>Presentation = <strong>Name of the subtype/presentation</strong> <em>Should be either <strong>hyperactive</strong>, <strong>inattentive</strong> or <strong>combined</strong>. Again, do not write the first letter in upper case</em></li>
+<li>Diagnosis procedure at baseline (Classification used, type of procedure (e.g., questionnaires, semi-structured clinical interview), and name of the tool used) = <strong>Name of the classification_type of procedure_name of tool.</strong> <em>For example, if a child was diagnosed using the DSM-5 criteria and the ADHDRS questionnaire, his</em> <strong>“diagbaseline”</strong> <em>value should be</em> <strong>DSM5_questionnaire_ADHDRS</strong>.</li>
+<li>Diagnosis procedure at follow up (Classification used, type of procedure (e.g., questionnaires, semi-structured clinical interview), and name of the tool used) = <strong>Name of the classification_type of procedure_name of tool.</strong> <em>For example, if a child was diagnosed using the DSM-5 criteria and the ADHDRS questionnaire, his</em> <strong>“diagfollowup”</strong> <em>value should be</em> <strong>DSM5_questionnaire_ADHDRS</strong>.
+<ul>
+<li>Note that it is very important to use a consistent scoring in “diagbaseline” and “diagfollowup”: analyses will compare these two columns to determine whether the same diagnosis procedure has been applied at baseline and follow up. The slightest difference in scoring between these two columns will therefore be interpreted as a difference in the diagnosis procedure used.</li>
+</ul></li>
+<li>Psychiatric comorbidities (e.g., Autism Spectrum Disorder) = <strong>none</strong> or no constraint. <em>If a participant has no known psychiatric comorbidity, his</em> <strong>“psychcomorbidity”</strong> <em>value should be</em> <strong>none</strong>. <em>Otherwise, name the psychiatric comorbidity (no constraint on the label, but be careful to use consistent labelling across participants: you can identify Autism Spectrum Disorder as Autism Spectrum Disorder, ASD, Autism, etc… but you should use the same label for all participants with Autism).</em></li>
+<li>Full scale IQ = <strong>score of the participants</strong>. In the column, simply indicates the standardized score of the participants at the psychometric scale.</li>
+</ul>
+<p><strong>Important: if a missing value appears in your dataset (e.g., the diagnosis at follow up has not been collected for one participant), complete all information you have on this participant, but let the cell for his diagnosis status at follow up empty. Do not fill it with some impossible numbers (e.g., -999999)). </strong><br>
+<strong>If you did not have any information for a particular column (e.g., no participant included in your study have completed an IQ test), write the name of the column but let all the cells of this column empty to indicate that these values are missing. </strong> <br>
+<strong>The formatted dataset below provided you an example.</strong></p>
+<p><strong>Formatted dataset</strong> <em>Once you have finished these modifications, your dataset should look like this one.</em><br>
+<em>In this dataset, some participants have missing values in the month of birth, diagnosis status at follow up and psychiatric comorbidities, and the IQ has not been collected</em></p>
+<p><img src="IMG_clean_dataset_ADHD.png" /></p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="installing-r-and-r-studio-15mn.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="perform-data-analysis-15mn.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

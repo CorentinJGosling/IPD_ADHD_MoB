@@ -1,0 +1,679 @@
+---
+title: "Scrit Data Analysis ADHD month of Birth"
+author: "Gosling CJ, Pinabiaux C, Caparos S, Delorme R & Cortese S"
+date: "26/05/2020"
+output: html_document
+---
+# Part 1. install packages required to the data analysis
+
+## Install the packages
+
+```{r}
+install.packages("readxl", dependencies = TRUE)
+install.packages("dplyr", dependencies = TRUE)
+install.packages("mice", dependencies = TRUE)
+install.packages("Hmisc", dependencies = TRUE)
+```
+
+# Part 2. Load and vizualise your dataset
+
+## 2.1 Load your dataset. 
+
+Run one of the three code provided below depending on the format in which your dataset is stored.
+When you run the code, an explorator window should open. If you don't see the window, simply reduce R and your other pages (the window has open but is behind other files)
+
+### 2.1.A. If your dataset is stored in ".txt", run this code
+```{r}
+df_ADHD <- read.delim(file.choose(), na.strings=c("", "NA"))
+```
+
+### 2.1.B. If your dataset is stored in ".csv" with "," as separator, run this code
+```{r}
+df_ADHD <- read.csv(file.choose(), sep=",", na.strings=c("", "NA"))
+```
+
+### 2.1.C. If your dataset is stored in ".csv" with ";" as separator, run this code
+```{r}
+df_ADHD <- read.csv(file.choose(), sep=";", na.strings=c("", "NA"))
+```
+
+### 2.1.D. If your dataset is stored in ".xls", run this code
+```{r}
+df_ADHD <- readxl::read_excel(file.choose())
+```
+
+
+## 2.2 Vizualise your dataset. 
+
+# this code will open a new tab in R studio named "df_ADHD". Once you have checked your data, you can come back to the script by click on the tab named "Script - Performing Analysis - MoB ADHD.Rmd"
+
+
+```{r}
+View(df_ADHD)
+```
+
+# If your dataset is not loaded correctly but you don't know where the error comes from, do not hesitate to contact us at <corentin.gosling@parisnanterre.fr>.
+
+
+# Part 3. Automating recoding of the data.
+
+Run this script only if your data are not coded correctly and you want us to send you the R code to recode all your values automatically. 
+
+```{r}
+
+Study1_ID <- unique(df_ADHD$ID)
+Study1_agebaseline <- unique(df_ADHD$agebaseline)
+Study1_agefollowup <- unique(df_ADHD$agefollowup)
+Study1_followupduration <- unique(df_ADHD$followupduration)
+Study1_month <- unique(df_ADHD$month)
+Study1_diagconfirmed <- unique(df_ADHD$diagconfirmed)
+Study1_presentationbaseline <- unique(df_ADHD$presentationbaseline)
+Study1_diagbaseline <- unique(df_ADHD$diagbaseline)
+Study1_diagfollowup <- unique(df_ADHD$diagfollowup)
+Study1_psychcomorbidity <- unique(df_ADHD$psychcomorbidity)
+Study1_IQ <- unique(df_ADHD$iq)
+
+
+save(Study1_ID,
+     Study1_agebaseline,
+     Study1_agefollowup,
+     Study1_followupduration,
+     Study1_month,
+     Study1_diagconfirmed,
+     Study1_presentationbaseline,
+     Study1_diagbaseline,
+     Study1_diagfollowup,
+     Study1_psychcomorbidity,
+     Study1_IQ,
+     file = "ADHD_Study1_recode.RData")
+```
+
+# Part 4. Perform data analysis
+```{r}
+# Inclusion criteria
+df_ADHD_ITT<- subset(df_ADHD, 
+                     agebaseline <= 10 &
+                       agefollowup >= 10 & 
+                       followupduration >= 4)
+
+# Recoding the month of birth to a numeric variable
+df_ADHD_ITT$monthrecoded<-dplyr::recode(df_ADHD_ITT$month,
+                            'january' = 1,
+                            'february' = 2, 
+                            'march' = 3,
+                            'april' = 4, 
+                            'may' = 5,
+                            'june' = 6, 
+                            'july' = 7,
+                            'august' = 8,
+                            'september' = 9,
+                            'october' = 10, 
+                            'november' = 11,
+                            'december' = 12)
+
+df_ADHD_ITT$ADHDdiag<-dplyr::recode(df_ADHD_ITT$diagconfirmed,
+                            'confirmed' = 1,
+                            'notconfirmed' = 0)
+
+Study1_clean_recoding_Month <- length(unique(df_ADHD_ITT$month)) == length(unique(df_ADHD_ITT$monthrecoded))
+
+Study1_clean_recoding_Diag <- length(unique(df_ADHD_ITT$diagconfirmed)) == length(unique(df_ADHD_ITT$ADHDdiag))
+
+# Setting appropriate type to every variables
+df_ADHD_ITT$agebaseline <- as.numeric(as.character(df_ADHD_ITT$agebaseline))
+df_ADHD_ITT$agefollowup <- as.numeric(as.character(df_ADHD_ITT$agefollowup))
+df_ADHD_ITT$followupduration <- as.numeric(as.character(df_ADHD_ITT$followupduration))
+df_ADHD_ITT$monthrecoded <- ordered(df_ADHD_ITT$monthrecoded)
+df_ADHD_ITT$ADHDdiag <- factor(df_ADHD_ITT$ADHDdiag)
+df_ADHD_ITT$presentationbaseline <- as.character(df_ADHD_ITT$presentationbaseline)
+df_ADHD_ITT$diagbaseline <- as.character(df_ADHD_ITT$diagbaseline)
+df_ADHD_ITT$diagfollowup <- as.character(df_ADHD_ITT$diagfollowup)
+df_ADHD_ITT$psychcomorbidity <- as.character(df_ADHD_ITT$psychcomorbidity)
+df_ADHD_ITT$iq <- as.numeric(as.character(df_ADHD_ITT$iq))
+
+# Filter missing values on IV and DV
+df_ADHD_CCA <- subset(df_ADHD_ITT, !is.na(monthrecoded) & !is.na(ADHDdiag))
+
+# Obtaining descriptive statistics on the full dataset (ITT; including participants with missing values) and on dataset without missing values on the IV and DV (CCA)
+
+# general description of the datasets
+Study1_df_ITT <- Hmisc::describe(df_ADHD_ITT)
+Study1_df_CCA <- Hmisc::describe(df_ADHD_CCA)
+
+# Number of participants
+Study1_N_ITT <- nrow(df_ADHD_ITT)
+Study1_N_CCA <- nrow(df_ADHD_CCA)
+
+# attrition
+## number of participants with a complete DV at baseline
+Study1_N_participants_baseline <- length(df_ADHD_ITT$ADHDdiag)
+## number of participants with a complete DV at follow up
+Study1_N_participants_followup <- length(na.omit(df_ADHD_ITT$ADHDdiag))
+## % of attrition
+Study1_Attrition <- Study1_N_participants_followup / Study1_N_participants_baseline
+
+# Set the minimum number of participants required to perform analyses
+Nmin <- 10
+
+# Primary analysis: linear effect of the month of birth on the ADHD persistence
+# the analysis is performed only if more than 10 participants have a non-missing IV (month of birth) and DV (ADHD diagnosis at follow up)
+# only the summary of the logistic regression is stored to ensure anonymity
+
+Study1_Nprimary <- nrow(df_ADHD_CCA)
+Study1_df_primary <- Hmisc::describe(df_ADHD_CCA)
+
+ifelse(
+    Study1_Nprimary >= Nmin,
+    Study1_LogPrimary <- summary(
+      glm(ADHDdiag ~ as.numeric(as.character(monthrecoded)), 
+      family = "binomial",
+      data = df_ADHD_CCA)
+      ),
+    Study1_LogPrimary <- paste0("Number of participants with a complete MoB and ADHD diagnosis at follow up is equal to: ", Study1_Nprimary))
+
+
+
+
+# Sensitivity analysis 1 : replication of the primary analysis but on participants with a Follow up duration superior or equal to 10 years
+# if the number of participants with such a follow up duration is lower than 10, the analysis is not computed.
+
+df.S1 <- subset(df_ADHD_CCA, followupduration >=10)
+
+Study1_NS1 <- nrow(df.S1)
+Study1_df_S1 <- Hmisc::describe(df.S1)
+
+ifelse(
+    Study1_NS1 >= Nmin,
+    Study1_LogS1 <- summary(
+      glm(ADHDdiag ~ as.numeric(as.character(monthrecoded)), 
+          family = "binomial",
+          data = df.S1)
+      ),
+    Study1_LogS1 <- paste0("Number of participants with a follow up duration superior to 10 years is equal to: ", Study1_NS1))
+
+
+
+# Sensitivity analysis 2 : replication of the primary analysis but on participants with an initial ADHD diagnosis performed before the age of 8 and a follow up ADHD diagnosis performed after the age of 16
+# if the number of participants with such a diagnoses criteria  is lower than 10, the analysis is not computed.
+
+df.S2 <- subset(df_ADHD_CCA, agebaseline <= 8 & agefollowup >= 16)
+
+Study1_NS2 <- nrow(df.S2)
+Study1_df_S2 <- Hmisc::describe(df.S2)
+
+ifelse(
+    Study1_NS2 >= Nmin,
+    Study1_LogS2 <- summary(
+      glm(ADHDdiag ~ as.numeric(as.character(monthrecoded)), 
+          family = "binomial", 
+          data = df.S2)
+      ),
+    Study1_LogS2 <- paste0("Number of participants with an age at baseline inferior to 8 years old and an age at follow up superior to 16 years old is equal to: ", Study1_NS2))
+
+
+
+# Sensitivity analysis 3 : replication of the primary analysis but on participants with an identical diagnosis procedure at baseline and follow up 
+# if the number of participants with such a diagnoses criteria  is lower than 10, the analysis is not computed.
+
+# we determine whether the participant has an identical diagnosis procedure at baseline or follow up (0 = identical / != 0 -> different)
+df_ADHD_CCA$Diag_diff <- stringi::stri_compare(
+    as.character(df_ADHD_CCA$diagbaseline), 
+    as.character(df_ADHD_CCA$diagfollowup)
+    )
+
+df.S3 <- subset(df_ADHD_CCA, Diag_diff == 0)
+Study1_NS3 <- nrow(df.S3)
+Study1_df_S3 <- Hmisc::describe(df.S3)
+
+ifelse(
+    Study1_NS3 >= Nmin,
+    Study1_LogS3 <- summary(
+      glm(ADHDdiag ~ as.numeric(as.character(monthrecoded)), 
+          family="binomial", 
+          data=df.S3)
+      ),
+    Study1_LogS3 <- paste0("Number of participants with an identical diagnosis procedure at baseline and follow up is equal to: ", Study1_NS3))
+
+
+
+# Sensitivity analysis 4 : replication of the primary analysis but on participants without any psychiatric comorbidity
+# if the number of participants without comorbidity is lower than 10, the analysis is not computed.
+
+df.S4 <- subset(df_ADHD_CCA, psychcomorbidity=="none")
+
+Study1_NS4 <- nrow(df.S4)
+Study1_df_S4 <- Hmisc::describe(df.S4)
+
+
+ifelse(
+    Study1_NS4 >= Nmin,
+    Study1_LogS4 <- summary(
+      glm(ADHDdiag ~ as.numeric(as.character(monthrecoded)), 
+          family = "binomial",
+          data = df.S4)
+      ),
+    Study1_LogS4 <- paste0("Number of participants without any psychiatric comorbidity is equal to: ", Study1_NS4))
+
+
+# Sensitivity analysis 5 : Determine whether the study has a low attrition rate (i.e., inferior to 20%).
+Study1_NS5 <- nrow(df_ADHD_CCA)
+Study1_df_S5 <- Hmisc::describe(df_ADHD_CCA)
+
+
+ifelse(
+    Study1_Attrition >= 0.8 & Study1_NS5 >= Nmin,
+    Study1_LogS5 <- summary(
+      glm(ADHDdiag ~ as.numeric(as.character(monthrecoded)), 
+          family = "binomial",
+          data = df_ADHD_CCA)
+      ),
+    Study1_LogS5 <- paste0("The percentage of attrition is equal to: ", Study1_Attrition_S5))
+
+
+# Sensitivity analysis 6 : replication of the primary analysis but with a robust regression (using the robust estimators described in Cantoni and Ronchetti (2006))
+# the analysis is performed only if more than 10 participants have a non-missing IV (month of birth) and DV (ADHD diagnosis at follow up)
+Study1_NS6 <- nrow(df_ADHD_CCA)
+Study1_df_S6 <- Hmisc::describe(df_ADHD_CCA)
+
+
+ifelse(
+    Study1_NS6 >= Nmin,
+    Study1_LogS6 <- summary(
+      robustbase::glmrob(ADHDdiag ~ as.numeric(as.character(monthrecoded)), 
+                         family = binomial, 
+                         method = "Mqle",
+                         data = df_ADHD_CCA)
+      ),
+    Study1_LogS6 <- paste0("Number of participants with a complete MoB and ADHD diagnosis at follow up is equal to: ", Study1_Nprimary))
+
+
+# Sensitivity analysis 7 : replication of the primary analysis but by handling missing values on IV or DV by performing multiple imputation
+
+# obtaining the percentage of missing values for all variables included in the dataset
+# the diagnosis procedure used at follow up is not included in analyses because (i) it will be missing when the diagnosis at follow up will be missing and (ii) it will be perfectly correlated to the diagnosis procedure at baseline in some studies
+Study1_Miss_agebaseline <- sum(is.na(df_ADHD_ITT$agebaseline)) / length(df_ADHD_ITT$agebaseline)
+Study1_Miss_agefollowup <- sum(is.na(df_ADHD_ITT$agefollowup)) / length(df_ADHD_ITT$agefollowup)
+Study1_Miss_followupduration <- sum(is.na(df_ADHD_ITT$followupduration)) / length(df_ADHD_ITT$followupduration)
+Study1_Miss_monthrecoded <- sum(is.na(df_ADHD_ITT$monthrecoded)) / length(df_ADHD_ITT$monthrecoded)
+Study1_Miss_ADHDdiag <- sum(is.na(df_ADHD_ITT$ADHDdiag)) / length(df_ADHD_ITT$ADHDdiag)
+Study1_Miss_presentationbaseline <- sum(is.na(df_ADHD_ITT$presentationbaseline)) / length(df_ADHD_ITT$presentationbaseline)
+Study1_Miss_diagbaseline <- sum(is.na(df_ADHD_ITT$diagbaseline)) / length(df_ADHD_ITT$diagbaseline)
+Study1_Miss_psychcomorbidity <- sum(is.na(df_ADHD_ITT$psychcomorbidity)) / length(df_ADHD_ITT$psychcomorbidity)
+
+# preparation of the datasets that will be imputed 
+
+# Dataset 1 : no auxiliary variable 
+df.S7.wo.AUX <- dplyr::select(df_ADHD_ITT, monthrecoded, ADHDdiag)
+
+# Dataset 2 : all auxiliary variable 
+df.S7.AUX.TOT <- dplyr::select(df_ADHD_ITT, 
+                               monthrecoded,
+                               ADHDdiag,
+                               agebaseline, 
+                               agefollowup, 
+                               followupduration, 
+                               presentationbaseline, 
+                               diagbaseline, 
+                               psychcomorbidity)
+
+# Dataset 3 : all auxiliary variable with a low rate of missing values (<= 25%).
+df_covariate <- dplyr::select(df_ADHD_ITT, 
+                              agebaseline, 
+                              agefollowup, 
+                              followupduration, 
+                              presentationbaseline, 
+                              diagbaseline, 
+                              psychcomorbidity)
+
+df.S7.AUX.select <- data.frame(
+  monthrecoded = df_ADHD_ITT$monthrecoded,
+  ADHDdiag = df_ADHD_ITT$ADHDdiag,
+  df_covariate[ ,which(colMeans(!is.na(df_covariate)) >= 0.75)])
+
+# imputation of the dataset with no auxiliary variables
+df_ADHD_Imput_wo_AUX <- mice::mice(
+  df.S7.wo.AUX,
+  m = 10, maxit = 10, seed = 4321)			  
+  
+# imputation of the dataset with all auxiliary variables
+df_ADHD_Imput_AUX_TOT <- mice::mice(
+  df.S7.AUX.TOT,
+  m = 10, maxit = 10, seed = 4321)	
+  
+# imputation of the dataset with auxiliary variables with low missing values
+df_ADHD_Imput_AUX_select <- mice::mice(
+  df.S7.AUX.select,
+  m = 10, maxit = 10, seed = 4321)	
+  
+# obtaining information on the imputation process 
+Study1_Imput_meth_wo_AUX <- df_ADHD_Imput_wo_AUX$method
+Study1_Imput_pred_wo_AUX <- df_ADHD_Imput_wo_AUX$predictorMatrix
+
+Study1_Imput_meth_AUX_TOT <- df_ADHD_Imput_AUX_TOT$method
+Study1_Imput_pred_AUX_TOT <- df_ADHD_Imput_AUX_TOT$predictorMatrix
+
+Study1_Imput_meth_AUX_select <- df_ADHD_Imput_AUX_select$method
+Study1_Imput_pred_AUX_select <- df_ADHD_Imput_AUX_select$predictorMatrix
+
+# N, unique month of birth and persistence for each imputation method
+Study1_NS7_wo_AUX <- nrow(mice::complete(df_ADHD_Imput_wo_AUX,1))
+Study1_df_S7_wo_AUX <- Hmisc::describe(mice::complete(df_ADHD_Imput_wo_AUX,1))
+
+Study1_NS7_AUX_TOT <- nrow(mice::complete(df_ADHD_Imput_AUX_TOT,1))
+Study1_df_S7_AUX_TOT <- Hmisc::describe(mice::complete(df_ADHD_Imput_AUX_TOT,1))
+
+Study1_NS7_AUX_select <- nrow(mice::complete(df_ADHD_Imput_AUX_select,1))
+Study1_df_S7_AUX_select <- Hmisc::describe(mice::complete(df_ADHD_Imput_AUX_select,1))
+
+
+# performing the primary analysis but on the 50 imputed datasets
+Study1_LogS7_wo_AUX_split <- with(df_ADHD_Imput_wo_AUX,
+                                  glm(ADHDdiag ~ as.numeric(as.character(monthrecoded)), 
+                                      family = "binomial"))
+
+Study1_LogS7_AUX_TOT_split <- with(df_ADHD_Imput_AUX_TOT,
+                                   glm(ADHDdiag ~ as.numeric(as.character(monthrecoded)), 
+                                       family = "binomial"))
+
+Study1_LogS7_AUX_select_split <- with(df_ADHD_Imput_AUX_select,
+                                      glm(ADHDdiag ~ as.numeric(as.character(monthrecoded)), 
+                                          family = "binomial"))
+
+# pooling the regression results
+Study1_LogS7_wo_AUX <- mice::pool(Study1_LogS7_wo_AUX_split)
+ 
+Study1_LogS7_AUX_TOT <- mice::pool(Study1_LogS7_AUX_TOT_split)
+
+Study1_LogS7_AUX_select <- mice::pool(Study1_LogS7_AUX_select_split)
+
+
+
+# Sensitivity analysis 8 : replication of the primary analysis but on each ADHD presentation separately
+
+df.S8.hyperactive <- subset(df_ADHD_CCA, presentationbaseline=="hyperactive")
+df.S8.inattentive <- subset(df_ADHD_CCA, presentationbaseline=="inattentive")
+df.S8.combined <- subset(df_ADHD_CCA, presentationbaseline=="combined")
+
+Study1_NS8_hyperactive <- nrow(df.S8.hyperactive)
+Study1_NS8_inattentive <- nrow(df.S8.inattentive)
+Study1_NS8_combined <- nrow(df.S8.combined)
+
+Study1_df_S8_hyperactive <- Hmisc::describe(df.S8.hyperactive)
+Study1_df_S8_inattentive <- Hmisc::describe(df.S8.inattentive)
+Study1_df_S8_combined <- Hmisc::describe(df.S8.combined)
+
+ifelse(
+    Study1_NS8_hyperactive >= Nmin,
+    Study1_LogS8_hyperactive <- summary(
+      glm(ADHDdiag ~ as.numeric(as.character(monthrecoded)), 
+          family = "binomial",
+          data = df.S8.hyperactive)
+      ),
+    Study1_LogS8_hyperactive <- paste0("Number of participants with an hyperactive presentation is equal to: ", Study1_NS8_hyperactive))
+
+ifelse(
+    Study1_NS8_inattentive >= Nmin,
+    Study1_LogS8_inattentive <- summary(
+      glm(ADHDdiag ~ as.numeric(as.character(monthrecoded)), 
+          family = "binomial",
+          data = df.S8.inattentive)
+      ),
+    Study1_LogS8_inattentive <- paste0("Number of participants with an inattentive presentation is equal to: ", Study1_NS8_inattentive))
+
+ifelse(
+    Study1_NS8_combined >= Nmin,
+    Study1_LogS8_combined <- summary(
+      glm(ADHDdiag ~ as.numeric(as.character(monthrecoded)), 
+          family = "binomial",
+          data = df.S8.combined)
+      ),
+    Study1_LogS8_combined <- paste0("Number of participants with a combined presentation is equal to: ", Study1_NS8_combined))
+
+# Sensitivity analysis 9 : replication of the primary analysis but at several values of IQ. 
+df.S9.iq.below.med <- subset(df_ADHD_CCA, iq < 100)
+df.S9.iq.above.med <- subset(df_ADHD_CCA, iq >= 100)
+
+df.S9.iq.cat1<- subset(df_ADHD_CCA, iq < 70)
+df.S9.iq.cat2<- subset(df_ADHD_CCA, iq >= 70 & iq < 85)
+df.S9.iq.cat3<- subset(df_ADHD_CCA, iq >= 85 & iq < 100)
+df.S9.iq.cat4<- subset(df_ADHD_CCA, iq >= 100 & iq < 115)
+df.S9.iq.cat5<- subset(df_ADHD_CCA, iq >= 115 & iq < 130)
+df.S9.iq.cat6<- subset(df_ADHD_CCA, iq >= 130)
+
+df.S9.iq.di <- subset(df_ADHD_CCA, iq <= 70)
+df.S9.iq.moy<- subset(df_ADHD_CCA, iq > 70 & iq < 130)
+df.S9.iq.hp <- subset(df_ADHD_CCA, iq >= 130)
+
+Study1_NS9_iq_below_med <- nrow(df.S9.iq.below.med)
+Study1_NS9_iq_above_med <- nrow(df.S9.iq.above.med)
+
+Study1_NS9_iq_cat1 <- nrow(df.S9.iq.cat1)
+Study1_NS9_iq_cat2 <- nrow(df.S9.iq.cat2)
+Study1_NS9_iq_cat3 <- nrow(df.S9.iq.cat3)
+Study1_NS9_iq_cat4 <- nrow(df.S9.iq.cat4)
+Study1_NS9_iq_cat5 <- nrow(df.S9.iq.cat5)
+Study1_NS9_iq_cat6 <- nrow(df.S9.iq.cat6)
+
+Study1_NS9_iq_di <- nrow(df.S9.iq.di)
+Study1_NS9_iq_moy <- nrow(df.S9.iq.moy)
+Study1_NS9_iq_hp <- nrow(df.S9.iq.hp)
+
+Study1_df_S9_iq_below_med <- Hmisc::describe(df.S9.iq.below.med)
+Study1_df_S9_iq_above_med <- Hmisc::describe(df.S9.iq.above.med)
+
+Study1_df_S9_iq_cat1 <- Hmisc::describe(df.S9.iq.cat1)
+Study1_df_S9_iq_cat2 <- Hmisc::describe(df.S9.iq.cat2)
+Study1_df_S9_iq_cat3 <- Hmisc::describe(df.S9.iq.cat3)
+Study1_df_S9_iq_cat4 <- Hmisc::describe(df.S9.iq.cat4)
+Study1_df_S9_iq_cat5 <- Hmisc::describe(df.S9.iq.cat5)
+Study1_df_S9_iq_cat6 <- Hmisc::describe(df.S9.iq.cat6)
+
+Study1_df_S9_iq_di <- Hmisc::describe(df.S9.iq.di)
+Study1_df_S9_iq_moy <- Hmisc::describe(df.S9.iq.moy)
+Study1_df_S9_iq_hp <- Hmisc::describe(df.S9.iq.hp)
+
+ifelse(
+    Study1_NS9_iq_below_med >= Nmin,
+    Study1_LogS9_iq_below_med <- summary(
+      glm(ADHDdiag ~ as.numeric(as.character(monthrecoded)), 
+          family = "binomial",
+          data = df.S9.iq.below.med)
+      ),
+    Study1_LogS9_iq_below_med <- paste0("Number of participants with an IQ below 100 is equal to: ", Study1_NS9_iq_below_med))
+
+ifelse(
+    Study1_NS9_iq_above_med >= Nmin,
+    Study1_LogS9_iq_above_med <- summary(
+      glm(ADHDdiag ~ as.numeric(as.character(monthrecoded)), 
+          family = "binomial",
+          data = df.S9.iq.above.med)
+      ),
+    Study1_LogS9_iq_above_med <- paste0("Number of participants with an IQ above 100 is equal to: ", Study1_NS9_iq_above_med))
+
+ifelse(
+    Study1_NS9_iq_cat1 >= Nmin,
+    Study1_LogS9_iq_cat1 <- summary(
+      glm(ADHDdiag ~ as.numeric(as.character(monthrecoded)), 
+          family = "binomial",
+          data = df.S9.iq.cat1)
+      ),
+    Study1_LogS9_iq_cat1 <- paste0("Number of participants with an IQ below 70 is equal to: ", Study1_NS9_iq_cat1))
+
+ifelse(
+    Study1_NS9_iq_cat2 >= Nmin,
+    Study1_LogS9_iq_cat2 <- summary(
+      glm(ADHDdiag ~ as.numeric(as.character(monthrecoded)), 
+          family = "binomial",
+          data = df.S9.iq.cat2)
+      ),
+    Study1_LogS9_iq_cat2 <- paste0("Number of participants with an IQ ranging from 70 to 85 is equal to: ", Study1_NS9_iq_cat2))
+
+ifelse(
+    Study1_NS9_iq_cat3 >= Nmin,
+    Study1_LogS9_iq_cat3 <- summary(
+      glm(ADHDdiag ~ as.numeric(as.character(monthrecoded)), 
+          family = "binomial",
+          data = df.S9.iq.cat3)
+      ),
+    Study1_LogS9_iq_cat3 <- paste0("Number of participants with an IQ ranging from 85 to 100 is equal to: ", Study1_NS9_iq_cat3))
+
+ifelse(
+    Study1_NS9_iq_cat4 >= Nmin,
+    Study1_LogS9_iq_cat4 <- summary(
+      glm(ADHDdiag ~ as.numeric(as.character(monthrecoded)), 
+          family = "binomial",
+          data = df.S9.iq.cat4)
+      ),
+    Study1_LogS9_iq_cat4 <- paste0("Number of participants with an IQ ranging from 100 to 115 is equal to: ", Study1_NS9_iq_cat4))
+
+ifelse(
+    Study1_NS9_iq_cat5 >= Nmin,
+    Study1_LogS9_iq_cat5 <- summary(
+      glm(ADHDdiag ~ as.numeric(as.character(monthrecoded)), 
+          family = "binomial",
+          data = df.S9.iq.cat5)
+      ),
+    Study1_LogS9_iq_cat5 <- paste0("Number of participants with an IQ ranging from 115 to 130 is equal to: ", Study1_NS9_iq_cat5))
+
+ifelse(
+    Study1_NS9_iq_cat6 >= Nmin,
+    Study1_LogS9_iq_cat6 <- summary(
+      glm(ADHDdiag ~ as.numeric(as.character(monthrecoded)), 
+          family = "binomial",
+          data = df.S9.iq.cat6)
+      ),
+    Study1_LogS9_iq_cat6 <- paste0("Number of participants with an IQ superior to 130 is equal to: ", Study1_NS9_iq_cat6))
+
+ifelse(
+    Study1_NS9_iq_di >= Nmin,
+    Study1_LogS9_iq_di <- summary(
+      glm(ADHDdiag ~ as.numeric(as.character(monthrecoded)), 
+          family = "binomial",
+          data = df.S9.iq.di)
+      ),
+    Study1_LogS9_iq_di <- paste0("Number of participants with an IQ below or equal to 70 is equal to: ", Study1_NS9_iq_di))
+
+ifelse(
+    Study1_NS9_iq_moy >= Nmin,
+    Study1_LogS9_iq_moy <- summary(
+      glm(ADHDdiag ~ as.numeric(as.character(monthrecoded)), 
+          family = "binomial",
+          data = df.S9.iq.moy)
+      ),
+    Study1_LogS9_iq_moy <- paste0("Number of participants with an IQ ranging from 70 to 130 is equal to: ", Study1_NS9_iq_moy))
+
+ifelse(
+    Study1_NS9_iq_hp >= Nmin,
+    Study1_LogS9_iq_hp <- summary(
+      glm(ADHDdiag ~ as.numeric(as.character(monthrecoded)), 
+          family = "binomial",
+          data = df.S9.iq.hp)
+      ),
+    Study1_LogS9_iq_hp <- paste0("Number of participants with an IQ superior or equal to 130 is equal to: ", Study1_NS9_iq_hp))
+save(
+  #verification of the recoding process
+  Study1_clean_recoding_Month,
+  Study1_clean_recoding_Diag,
+#description of the datasets 
+  Study1_df_ITT,
+  Study1_df_CCA,
+  Study1_df_primary,
+  Study1_df_S1,
+  Study1_df_S2,
+  Study1_df_S3,
+  Study1_df_S4,
+  Study1_df_S5,
+  Study1_df_S6,
+  Study1_df_S7_wo_AUX,
+  Study1_df_S7_AUX_TOT,
+  Study1_df_S7_AUX_select,
+  Study1_df_S8_hyperactive,
+  Study1_df_S8_inattentive,
+  Study1_df_S8_combined,
+  Study1_df_S9_iq_below_med,
+  Study1_df_S9_iq_above_med,
+  Study1_df_S9_iq_cat1,
+  Study1_df_S9_iq_cat2,
+  Study1_df_S9_iq_cat3,
+  Study1_df_S9_iq_cat4,
+  Study1_df_S9_iq_cat5,
+  Study1_df_S9_iq_cat6,
+  Study1_df_S9_iq_di,
+  Study1_df_S9_iq_moy,
+  Study1_df_S9_iq_hp,
+# number of participants
+  Study1_N_ITT, 
+  Study1_N_CCA,
+  Study1_Nprimary,
+  Study1_NS1,
+  Study1_NS2,
+  Study1_NS3,
+  Study1_NS4,
+  Study1_NS5,
+  Study1_NS6,
+  Study1_NS7_wo_AUX,
+  Study1_NS7_AUX_TOT,
+  Study1_NS7_AUX_select,
+  Study1_NS8_hyperactive,
+  Study1_NS8_inattentive,
+  Study1_NS8_combined,
+  Study1_NS9_iq_below_med,
+  Study1_NS9_iq_above_med,
+  Study1_NS9_iq_cat1,
+  Study1_NS9_iq_cat2,
+  Study1_NS9_iq_cat3,
+  Study1_NS9_iq_cat4,
+  Study1_NS9_iq_cat5,
+  Study1_NS9_iq_cat6,
+  Study1_NS9_iq_di,
+  Study1_NS9_iq_moy,
+  Study1_NS9_iq_hp,
+# attrition
+  Study1_N_participants_baseline, 
+  Study1_N_participants_followup, 
+  Study1_Attrition, 
+#Results of regression
+  Study1_LogPrimary,
+  Study1_LogS1,
+  Study1_LogS2,
+  Study1_LogS3,
+  Study1_LogS4,
+  Study1_LogS5,
+  Study1_LogS6,
+  Study1_LogS7_wo_AUX,
+  Study1_LogS7_AUX_TOT,
+  Study1_LogS7_AUX_select, 
+  Study1_LogS8_hyperactive,
+  Study1_LogS8_inattentive,
+  Study1_LogS8_combined,
+  Study1_LogS9_iq_below_med,
+  Study1_LogS9_iq_above_med,
+  Study1_LogS9_iq_cat1,
+  Study1_LogS9_iq_cat2,
+  Study1_LogS9_iq_cat3,
+  Study1_LogS9_iq_cat4,
+  Study1_LogS9_iq_cat5,
+  Study1_LogS9_iq_cat6,
+  Study1_LogS9_iq_di,
+  Study1_LogS9_iq_moy,
+  Study1_LogS9_iq_hp,
+#Percentages of missing values 
+  Study1_Miss_agebaseline,
+  Study1_Miss_agefollowup,
+  Study1_Miss_followupduration,
+  Study1_Miss_monthrecoded,
+  Study1_Miss_ADHDdiag,
+  Study1_Miss_presentationbaseline,
+  Study1_Miss_diagbaseline,
+  Study1_Miss_psychcomorbidity,
+#Information on the imputation process
+  Study1_Imput_meth_wo_AUX,
+  Study1_Imput_pred_wo_AUX,
+  Study1_Imput_meth_AUX_TOT, 
+  Study1_Imput_pred_AUX_TOT,
+  Study1_Imput_meth_AUX_select, 
+  Study1_Imput_pred_AUX_select, 
+file = "ADHD_Study1_res.RData")
+Location <- getwd()
+paste0("The file has been generated at the following location on your computer: ", "'",Location,"/ADHD_Study1_res.RData", "'")
+```

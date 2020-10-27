@@ -1,0 +1,26 @@
+--- 
+title: "Month of birth and persistence of ADHD: an IPD meta analysis"
+author: "Gosling CJ, Pinabiaux C, Caparos S, Delorme R & Cortese S"
+date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+documentclass: book
+bibliography: [book.bib, packages.bib]
+biblio-style: apalike
+link-citations: yes
+description: "This book is designed to assist you in performing the data analysis for the IPD meta analysis."
+---
+
+# Forword
+
+We would like to thank you warmly for your collaboration with our research team. 
+
+This document details how to carry out the data analysis described in Gosling, Pinabiaux, Caparos, Delorme & Cortese (2020) <doi: >. 
+
+As you will see, we will explain you:
+
+  + how to install R and R studio
+  + how to format your dataset
+  + how to run the R script which will automatically perform all the required analyses 
+  + how to share the results of the analyses with us
+  
+If you have any question, you can ask them directly to corentin.gosling@parisnanterre.fr. We can also schedule a visioconference to assist you in performing the analysis. All the process (from downloading R to obtaining results) usually takes no more than one hour.
