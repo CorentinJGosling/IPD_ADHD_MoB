@@ -1,7 +1,0 @@
-bookdown::gitbook:
-  toc_depth: 2
-  css: style.css
-  config:
-    toc:
-      before: |
-        <li><a href="./">Month of birth & ADHD</a></li>

@@ -10,17 +10,17 @@ link-citations: yes
 description: "This book is designed to assist you in performing the data analysis for the IPD meta analysis."
 ---
 
-# Forword
+# Forword{-}
 
 We would like to thank you warmly for your collaboration with our research team. 
 
-This document details how to carry out the data analysis described in Gosling, Pinabiaux, Caparos, Delorme & Cortese (2020) <doi: >. 
+This document details how to carry out the data analysis described in Gosling, Pinabiaux, Caparos, Delorme & Cortese (2020) <doi: incoming>. 
 
-As you will see, we will explain you:
+As you will see, we will explain here:
 
   + how to install R and R studio
   + how to format your dataset
   + how to run the R script which will automatically perform all the required analyses 
   + how to share the results of the analyses with us
   
-If you have any question, you can ask them directly to corentin.gosling@parisnanterre.fr. We can also schedule a visioconference to assist you in performing the analysis. All the process (from downloading R to obtaining results) usually takes no more than one hour.
+If you have any question, you can ask them directly to corentin.gosling@parisnanterre.fr. We can also schedule a visioconference to assist you in performing the analysis. All the process (from downloading R to obtaining the results) usually takes no more than one hour.

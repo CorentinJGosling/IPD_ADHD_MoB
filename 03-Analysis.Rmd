@@ -9,13 +9,13 @@ The R file script will help you load your dataset and either recode values or pe
 To load the script:
   + Click on **File** (top left of R studio panel)
   + Then, click on **Open file..** 
-  + an explorator window should open, you can locate and open the script.
-+ Once the script is loaded, run each part of the script sequentially (starting from Part 1) by clicking on the green arrow at the top right of each greybox
+  + an explorator window should open, and you can locate and open the script.
++ Once the script is loaded, run each part of the script sequentially (starting from *"Part A"*) by clicking on the green arrow at the top right of each greybox
 
 ![](/Users/coren/Documents/ADHD_MoB/IMG_RunChunk_ADHD.png)
 
 ## Install the packages 
-Start by running the "Part 1. install packages required to the data analysis" to install the required packages
+Start by running the *"Part A. Install packages required to the data analysis"* to install the required packages
 
 ## Load your dataset 
 Once packages have been installed, you will have to load your dataset. Several options are available in the script, depending on the file format.
@@ -24,19 +24,18 @@ Once packages have been installed, you will have to load your dataset. Several o
 
 To open the explorator window loading your dataset, run either :
 
-  + "Part 2.1.A." if your dataset is stored in .txt format
+  + Part *"B.I.a."* if your dataset is stored in .txt format
   or
-  + "Part 2.1.B." or "Part 2.1.C." if your dataset is stored in .csv format (choose the appropriate separator)
+  + Part *"B.I.b."* or Part *"B.I.c."* if your dataset is stored in .csv format (choose the appropriate separator)
   or
-  + "Part 2.1.D." if your dataset is stored in .xls/xlsx format
+  + Part *"B.I.d."* if your dataset is stored in .xls/xlsx format
 
 ## Visualize your dataset
-View your dataset by running "Part 2.2 - Visualize your dataset" to ensure that the dataset has been correctly loaded and that no issue has occured. **Note that running this code will open a new tab in R studio named "Data_ADHD". Once you have checked your data, you can come back to the script by clicking on the initial tab named "Script_IPD_ADHD_MoB_YourName.Rmd"**
+View your dataset by running part *"B.II Visualise your dataset."* to ensure that the dataset has been correctly loaded and that no issue has occured. **Note that running this code will open a new tab in R studio named "Data_ADHD". Once you have checked your data, you can come back to the script by clicking on the initial tab named "Script_IPD_ADHD_MoB_YourName.Rmd"**
 
 ## Recode the dataset
 This part is useful **if, and only if, you have not recoded the dataset manually**. <br>
-If you have not recoded your dataset manually, run the "Part 3 - Automating recoding of the data" of the script. Once you have run the "Part 3", ignore the following point 4.6 of this document and jump to the section 5 to export the file generated<br> 
-If your dataset is correctely formatted, jump to the next point (4.6)
+If you have not recoded your dataset manually, run the *"Part C. Automating recoding of the data*". of the script. Once you have run this Part C, come back to the present document, ignore the following point 3.6, and jump directly to the point 4. The point 4 will explain how to export the file generated.<br> 
 
 ## Perform data analysis 
-Once your dataset is correctly formatted, the last step is to perform data analysis by running "Part 4 - Perform data analysis". Once you have run the Part 4, you can export the results by following indications in the section 5 of this document. 
+Once your dataset is correctly formatted, the last step is to perform the data analysis by running the *"Part D. Perform data analysis"*. Once you have run the Part D, you can export the results by following indications in the point 4 of this document. 
