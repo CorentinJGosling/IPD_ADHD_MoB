@@ -10,7 +10,7 @@ Open your dataset with the spreadsheet software you use. For instance:
 
 ## Select appropriate columns
 
-Only 11 columns will be required for the analysis. Here is the list:
+Only 12 columns will be required for the analysis. Here is the list:
 
 1.	A column containing the participant identifiers
 2.	A column containing the age of participants at baseline
@@ -19,10 +19,11 @@ Only 11 columns will be required for the analysis. Here is the list:
 5.	A column containing the month of birth of the participants *(If the birthdate of the participant is stored under a format like this (e.g., “07-11-1993” or "07/11/1993"), you can let your variable in this format but you have to inform us, so we can adapt the R code*
 6.	A column containing the diagnosis status at follow up (confirmed or not confirmed)
 7.	A column containing the subtype / presentation at baseline (hyperactive/inattentive/combined)
-8.	A column containing the diagnosis procedure at baseline
-9.	A column containing the diagnosis procedure at follow up
-10.	A column containing the psychiatric comorbidities of the participants
-11. A column containing the full-scale IQ score of the participants
+8.	A column containing the subtype / presentation at follow up (hyperactive/inattentive/combined)
+9.	A column containing the diagnosis procedure at baseline
+10.	A column containing the diagnosis procedure at follow up
+11.	A column containing the psychiatric comorbidities of the participants
+12. A column containing the full-scale IQ score of the participants
 
 
 ## Rename columns 
@@ -35,7 +36,8 @@ In bold, the name that should be given to the corresponding column
 + Follow up duration = **followupduration**
 + Month of birth = **month**
 + Diagnosis status at follow up = **diagconfirmed**
-+ Subtype/presentation at baseline = **presentation**
++ Subtype/presentation at baseline = **presentationbaseline**
++ Subtype/presentation at followup = **presentationfollowup**
 + Diagnosis procedure at baseline = **diagbaseline**
 + Diagnosis procedure at follow up = **diagfollowup**
 + Psychiatric comorbidities (e.g., Autism Spectrum Disorder) = **psychcomorbidity**
@@ -64,7 +66,8 @@ In bold, the name that should be given to the corresponding values
 + Follow up duration = **Follow up in years.** *For example, if a child has a follow up duration of 5 years and 8 months, his* **followupduration** *value should be: 5 + 8/12 =* **5.67**
 + Month of birth = **Standard months names.** *For example, january, february, march, etc... do not write the first letter in upper case (write january, not January)*
 + ADHD diagnosis status at follow up = **confirmed or notconfirmed.** *if the diagnosis is confirmed at follow up, the* **"diagconfirmed"** *value should be* **confirmed** /  *if the diagnosis is not confirmed at follow up (i.e., participants do not longer meet ADHD criteria), the* **"diagconfirmed"** *value should be* **notconfirmed**
-+ Presentation = **Name of the subtype/presentation** *Should be either **hyperactive**, **inattentive** or **combined**. Again, do not write the first letter in upper case*
++ Presentation at baseline = **Name of the subtype/presentation at baseline** *Should be either **hyperactive**, **inattentive** or **combined**. Again, do not write the first letter in upper case*
++ Presentation at follow up = **Name of the subtype/presentation at follow up** *Should be either **hyperactive**, **inattentive** or **combined**. Again, do not write the first letter in upper case*
 + Diagnosis procedure at baseline (Classification used, type of procedure (e.g., questionnaires, semi-structured clinical interview), and name of the tool used) = **Name of the classification_type of procedure_name of tool.** *For example, if a child was diagnosed using the DSM-5 criteria and the ADHDRS questionnaire, his* **"diagbaseline"** *value should be* **DSM5_questionnaire_ADHDRS**. 
 + Diagnosis procedure at follow up (Classification used, type of procedure (e.g., questionnaires, semi-structured clinical interview), and name of the tool used) = **Name of the classification_type of procedure_name of tool.** *For example, if a child was diagnosed using the DSM-5 criteria and the ADHDRS questionnaire, his* **"diagfollowup"** *value should be* **DSM5_questionnaire_ADHDRS**.
   + Note that it is very important to use a consistent scoring in "diagbaseline" and "diagfollowup": analyses will compare these two columns to determine whether the same diagnosis procedure has been applied at baseline and follow up. The slightest difference in scoring between these two columns will therefore be interpreted as a difference in the diagnosis procedure used.

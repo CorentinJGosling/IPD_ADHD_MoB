@@ -24,7 +24,7 @@
 <meta name="author" content="Gosling CJ, Pinabiaux C, Caparos S, Delorme R &amp; Cortese S" />
 
 
-<meta name="date" content="2020-10-29" />
+<meta name="date" content="2020-11-13" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -116,7 +116,7 @@
 </div>
 <div id="select-appropriate-columns" class="section level2">
 <h2><span class="header-section-number">2.2</span> Select appropriate columns</h2>
-<p>Only 11 columns will be required for the analysis. Here is the list:</p>
+<p>Only 12 columns will be required for the analysis. Here is the list:</p>
 <ol style="list-style-type: decimal">
 <li>A column containing the participant identifiers</li>
 <li>A column containing the age of participants at baseline</li>
@@ -125,6 +125,7 @@
 <li>A column containing the month of birth of the participants <em>(If the birthdate of the participant is stored under a format like this (e.g., “07-11-1993” or “07/11/1993”), you can let your variable in this format but you have to inform us, so we can adapt the R code</em></li>
 <li>A column containing the diagnosis status at follow up (confirmed or not confirmed)</li>
 <li>A column containing the subtype / presentation at baseline (hyperactive/inattentive/combined)</li>
+<li>A column containing the subtype / presentation at follow up (hyperactive/inattentive/combined)</li>
 <li>A column containing the diagnosis procedure at baseline</li>
 <li>A column containing the diagnosis procedure at follow up</li>
 <li>A column containing the psychiatric comorbidities of the participants</li>
@@ -141,7 +142,8 @@
 <li>Follow up duration = <strong>followupduration</strong></li>
 <li>Month of birth = <strong>month</strong></li>
 <li>Diagnosis status at follow up = <strong>diagconfirmed</strong></li>
-<li>Subtype/presentation at baseline = <strong>presentation</strong></li>
+<li>Subtype/presentation at baseline = <strong>presentationbaseline</strong></li>
+<li>Subtype/presentation at followup = <strong>presentationfollowup</strong></li>
 <li>Diagnosis procedure at baseline = <strong>diagbaseline</strong></li>
 <li>Diagnosis procedure at follow up = <strong>diagfollowup</strong></li>
 <li>Psychiatric comorbidities (e.g., Autism Spectrum Disorder) = <strong>psychcomorbidity</strong></li>
@@ -166,7 +168,8 @@
 <li>Follow up duration = <strong>Follow up in years.</strong> <em>For example, if a child has a follow up duration of 5 years and 8 months, his</em> <strong>followupduration</strong> <em>value should be: 5 + 8/12 =</em> <strong>5.67</strong></li>
 <li>Month of birth = <strong>Standard months names.</strong> <em>For example, january, february, march, etc… do not write the first letter in upper case (write january, not January)</em></li>
 <li>ADHD diagnosis status at follow up = <strong>confirmed or notconfirmed.</strong> <em>if the diagnosis is confirmed at follow up, the</em> <strong>“diagconfirmed”</strong> <em>value should be</em> <strong>confirmed</strong> / <em>if the diagnosis is not confirmed at follow up (i.e., participants do not longer meet ADHD criteria), the</em> <strong>“diagconfirmed”</strong> <em>value should be</em> <strong>notconfirmed</strong></li>
-<li>Presentation = <strong>Name of the subtype/presentation</strong> <em>Should be either <strong>hyperactive</strong>, <strong>inattentive</strong> or <strong>combined</strong>. Again, do not write the first letter in upper case</em></li>
+<li>Presentation at baseline = <strong>Name of the subtype/presentation at baseline</strong> <em>Should be either <strong>hyperactive</strong>, <strong>inattentive</strong> or <strong>combined</strong>. Again, do not write the first letter in upper case</em></li>
+<li>Presentation at follow up = <strong>Name of the subtype/presentation at follow up</strong> <em>Should be either <strong>hyperactive</strong>, <strong>inattentive</strong> or <strong>combined</strong>. Again, do not write the first letter in upper case</em></li>
 <li>Diagnosis procedure at baseline (Classification used, type of procedure (e.g., questionnaires, semi-structured clinical interview), and name of the tool used) = <strong>Name of the classification_type of procedure_name of tool.</strong> <em>For example, if a child was diagnosed using the DSM-5 criteria and the ADHDRS questionnaire, his</em> <strong>“diagbaseline”</strong> <em>value should be</em> <strong>DSM5_questionnaire_ADHDRS</strong>.</li>
 <li>Diagnosis procedure at follow up (Classification used, type of procedure (e.g., questionnaires, semi-structured clinical interview), and name of the tool used) = <strong>Name of the classification_type of procedure_name of tool.</strong> <em>For example, if a child was diagnosed using the DSM-5 criteria and the ADHDRS questionnaire, his</em> <strong>“diagfollowup”</strong> <em>value should be</em> <strong>DSM5_questionnaire_ADHDRS</strong>.
 <ul>
