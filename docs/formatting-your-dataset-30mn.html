@@ -24,7 +24,7 @@
 <meta name="author" content="Gosling CJ, Pinabiaux C, Caparos S, Delorme R &amp; Cortese S" />
 
 
-<meta name="date" content="2020-11-13" />
+<meta name="date" content="2021-01-21" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -116,7 +116,7 @@
 </div>
 <div id="select-appropriate-columns" class="section level2">
 <h2><span class="header-section-number">2.2</span> Select appropriate columns</h2>
-<p>Only 12 columns will be required for the analysis. Here is the list:</p>
+<p>Up to 14 columns will be required for the analysis. Here is the list:</p>
 <ol style="list-style-type: decimal">
 <li>A column containing the participant identifiers</li>
 <li>A column containing the age of participants at baseline</li>
@@ -128,6 +128,8 @@
 <li>A column containing the subtype / presentation at follow up (hyperactive/inattentive/combined)</li>
 <li>A column containing the diagnosis procedure at baseline</li>
 <li>A column containing the diagnosis procedure at follow up</li>
+<li>A column containing information on pharmacological treatments at baseline</li>
+<li>A column containing information on pharmacological treatments at follow up</li>
 <li>A column containing the psychiatric comorbidities of the participants</li>
 <li>A column containing the full-scale IQ score of the participants</li>
 </ol>
@@ -146,6 +148,8 @@
 <li>Subtype/presentation at followup = <strong>presentationfollowup</strong></li>
 <li>Diagnosis procedure at baseline = <strong>diagbaseline</strong></li>
 <li>Diagnosis procedure at follow up = <strong>diagfollowup</strong></li>
+<li>Pharmacological treatment at baseline = <strong>pharmabaseline</strong></li>
+<li>Pharmacological treatment at follow up = <strong>pharmafollowup</strong></li>
 <li>Psychiatric comorbidities (e.g., Autism Spectrum Disorder) = <strong>psychcomorbidity</strong></li>
 <li>Full-scale IQ score = <strong>iq</strong></li>
 </ul>
@@ -174,6 +178,8 @@
 <li>Diagnosis procedure at follow up (Classification used, type of procedure (e.g., questionnaires, semi-structured clinical interview), and name of the tool used) = <strong>Name of the classification_type of procedure_name of tool.</strong> <em>For example, if a child was diagnosed using the DSM-5 criteria and the ADHDRS questionnaire, his</em> <strong>“diagfollowup”</strong> <em>value should be</em> <strong>DSM5_questionnaire_ADHDRS</strong>.
 <ul>
 <li>Note that it is very important to use a consistent scoring in “diagbaseline” and “diagfollowup”: analyses will compare these two columns to determine whether the same diagnosis procedure has been applied at baseline and follow up. The slightest difference in scoring between these two columns will therefore be interpreted as a difference in the diagnosis procedure used.</li>
+<li>Pharmacological treatment for ADHD at baseline = <strong>Name of the pharmacological treatments taken at baseline.</strong> <em>For example, if a child is not taking any medication at baseline,</em> <strong>“pharmabaseline”</strong> <em>value should be</em> <strong>none</strong>.</li>
+<li>Pharmacological treatment for ADHD at follow up = <strong>Name of the pharmacological treatments taken at follow up</strong> <em>For example, if a child is taking Methylphenidate at follow up,</em> <strong>“pharmafollowup”</strong> <em>value should be</em> <strong>methylphenidate</strong>.</li>
 </ul></li>
 <li>Psychiatric comorbidities (e.g., Autism Spectrum Disorder) = <strong>none</strong> or no constraint. <em>If a participant has no known psychiatric comorbidity, his</em> <strong>“psychcomorbidity”</strong> <em>value should be</em> <strong>none</strong>. <em>Otherwise, name the psychiatric comorbidity (no constraint on the label, but be careful to use consistent labelling across participants: you can identify Autism Spectrum Disorder as Autism Spectrum Disorder, ASD, Autism, etc… but you should use the same label for all participants with Autism).</em></li>
 <li>Full scale IQ = <strong>score of the participants</strong>. In the column, simply indicate the standardized score of the participants at the psychometric scale.</li>

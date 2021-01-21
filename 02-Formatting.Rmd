@@ -10,7 +10,7 @@ Open your dataset with the spreadsheet software you use. For instance:
 
 ## Select appropriate columns
 
-Only 12 columns will be required for the analysis. Here is the list:
+Up to 14 columns will be required for the analysis. Here is the list:
 
 1.	A column containing the participant identifiers
 2.	A column containing the age of participants at baseline
@@ -22,8 +22,10 @@ Only 12 columns will be required for the analysis. Here is the list:
 8.	A column containing the subtype / presentation at follow up (hyperactive/inattentive/combined)
 9.	A column containing the diagnosis procedure at baseline
 10.	A column containing the diagnosis procedure at follow up
-11.	A column containing the psychiatric comorbidities of the participants
-12. A column containing the full-scale IQ score of the participants
+11. A column containing information on pharmacological treatments at baseline
+12. A column containing information on pharmacological treatments at follow up
+13.	A column containing the psychiatric comorbidities of the participants
+14. A column containing the full-scale IQ score of the participants
 
 
 ## Rename columns 
@@ -40,6 +42,8 @@ In bold, the name that should be given to the corresponding column
 + Subtype/presentation at followup = **presentationfollowup**
 + Diagnosis procedure at baseline = **diagbaseline**
 + Diagnosis procedure at follow up = **diagfollowup**
++ Pharmacological treatment at baseline = **pharmabaseline**
++ Pharmacological treatment at follow up = **pharmafollowup**
 + Psychiatric comorbidities (e.g., Autism Spectrum Disorder) = **psychcomorbidity**
 + Full-scale IQ score = **iq**
 
@@ -71,6 +75,8 @@ In bold, the name that should be given to the corresponding values
 + Diagnosis procedure at baseline (Classification used, type of procedure (e.g., questionnaires, semi-structured clinical interview), and name of the tool used) = **Name of the classification_type of procedure_name of tool.** *For example, if a child was diagnosed using the DSM-5 criteria and the ADHDRS questionnaire, his* **"diagbaseline"** *value should be* **DSM5_questionnaire_ADHDRS**. 
 + Diagnosis procedure at follow up (Classification used, type of procedure (e.g., questionnaires, semi-structured clinical interview), and name of the tool used) = **Name of the classification_type of procedure_name of tool.** *For example, if a child was diagnosed using the DSM-5 criteria and the ADHDRS questionnaire, his* **"diagfollowup"** *value should be* **DSM5_questionnaire_ADHDRS**.
   + Note that it is very important to use a consistent scoring in "diagbaseline" and "diagfollowup": analyses will compare these two columns to determine whether the same diagnosis procedure has been applied at baseline and follow up. The slightest difference in scoring between these two columns will therefore be interpreted as a difference in the diagnosis procedure used.
+  + Pharmacological treatment for ADHD at baseline = **Name of the pharmacological treatments taken at baseline.** *For example, if a child is not taking any medication at baseline,* **"pharmabaseline"** *value should be* **none**. 
+  + Pharmacological treatment for ADHD at follow up = **Name of the pharmacological treatments taken at follow up** *For example, if a child is taking Methylphenidate at follow up,* **"pharmafollowup"** *value should be* **methylphenidate**. 
  + Psychiatric comorbidities (e.g., Autism Spectrum Disorder) = **none** or no constraint. *If a participant has no known psychiatric comorbidity, his* **"psychcomorbidity"** *value should be* **none**. *Otherwise, name the psychiatric comorbidity (no constraint on the label, but be careful to use consistent labelling across participants: you can identify Autism Spectrum Disorder as Autism Spectrum Disorder, ASD, Autism, etc… but you should use the same label for all participants with Autism).*
  + Full scale IQ = **score of the participants**. In the column, simply indicate the standardized score of the participants at the psychometric scale. 
  
