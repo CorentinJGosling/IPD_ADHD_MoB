@@ -14,7 +14,7 @@ description: "This book is designed to assist you in performing the data analysi
 
 We would like to thank you warmly for your collaboration with our research team. 
 
-This document details how to carry out the data analysis described in Gosling, Pinabiaux, Caparos, Delorme & Cortese (2020) <doi: incoming>. 
+This document details how to carry out the data analysis described in Gosling, Pinabiaux, Caparos, Delorme & Cortese (2020) <https://bmjopen.bmj.com/content/bmjopen/10/11/e040952.full.pdf>. 
 
 As you will see, we will explain here:
 
