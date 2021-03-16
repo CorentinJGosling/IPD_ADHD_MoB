@@ -13,7 +13,7 @@ Open your dataset with the spreadsheet software you use. For instance:
 Up to 15 columns will be required for the analysis. Here is the list:
 
 1.	A column containing the participant identifiers
-2.  A column containing the academic level of the participants
+2.  A column containing the academic level of the participants at baseline
 3.	A column containing the age of participants at baseline
 4.	A column containing the age of participants at follow up
 5.	A column containing the follow up duration
@@ -34,7 +34,7 @@ Up to 15 columns will be required for the analysis. Here is the list:
 In bold, the name that should be given to the corresponding column
 
 + Participants identifier = **ID**
-+ Academic level = **schoolyear**
++ Academic level at baseline = **schoolyearbaseline**
 + Age at baseline = **agebaseline**
 + Age at Follow up = **agefollowup**
 + Follow up duration = **followupduration**
@@ -67,8 +67,8 @@ In order to recode your dataset automatically, we need to determine how you have
 In bold, the name that should be given to the corresponding values
 
 + Participants identifier = **no constraint** *You can identify your participants as you wish*
-+ Academic level = **the school year of the children** *For example, if a child is in its first school year, his* **schoolyear** *value should be 1*
-+ Age at baseline = **Age in years.** *For example, if a child was 8 years and 2 months at baseline, his* **"agebaseline"** *value should be: 8 + 2/12 =* **8.17**
++ Academic level at baseline = **the school year of the children at baseline.** *For example, if a child is in its first school year, his* **schoolyearbaseline** *value should be 1*
++ Age at baseline = **Age in years.** *For example, if a child was 8 years and 2 months at baseline, his* **agebaseline** *value should be: 8 + 2/12 =* **8.17**
 + Age at Follow up = **Age in years.** *For example, if a child was 11 years and 4 months at follow up, his* **"agefollowup"** *value should be: 11 + 4/12 =* **11.33**
 + Follow up duration = **Follow up in years.** *For example, if a child has a follow up duration of 5 years and 8 months, his* **followupduration** *value should be: 5 + 8/12 =* **5.67**
 + Month of birth = **Standard months names.** *For example, january, february, march, etc... do not write the first letter in upper case (write january, not January)*
