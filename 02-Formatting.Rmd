@@ -10,22 +10,23 @@ Open your dataset with the spreadsheet software you use. For instance:
 
 ## Select appropriate columns
 
-Up to 14 columns will be required for the analysis. Here is the list:
+Up to 15 columns will be required for the analysis. Here is the list:
 
 1.	A column containing the participant identifiers
-2.	A column containing the age of participants at baseline
-3.	A column containing the age of participants at follow up
-4.	A column containing the follow up duration
-5.	A column containing the month of birth of the participants *(If the birthdate of the participant is stored under a format like this (e.g., “07-11-1993” or "07/11/1993"), you can let your variable in this format but you have to inform us, so we can adapt the R code*
-6.	A column containing the diagnosis status at follow up (confirmed or not confirmed)
-7.	A column containing the subtype / presentation at baseline (hyperactive/inattentive/combined)
-8.	A column containing the subtype / presentation at follow up (hyperactive/inattentive/combined)
-9.	A column containing the diagnosis procedure at baseline
-10.	A column containing the diagnosis procedure at follow up
-11. A column containing information on pharmacological treatments at baseline
-12. A column containing information on pharmacological treatments at follow up
-13.	A column containing the psychiatric comorbidities of the participants
-14. A column containing the full-scale IQ score of the participants
+2.  A column containing the school level of the participants
+3.	A column containing the age of participants at baseline
+4.	A column containing the age of participants at follow up
+5.	A column containing the follow up duration
+6.	A column containing the month of birth of the participants *(If the birthdate of the participant is stored under a format like this (e.g., “07-11-1993” or "07/11/1993"), you can let your variable in this format but you have to inform us, so we can adapt the R code*
+7.	A column containing the diagnosis status at follow up (confirmed or not confirmed)
+8.	A column containing the subtype / presentation at baseline (hyperactive/inattentive/combined)
+9.	A column containing the subtype / presentation at follow up (hyperactive/inattentive/combined)
+10.	A column containing the diagnosis procedure at baseline
+11.	A column containing the diagnosis procedure at follow up
+12. A column containing information on pharmacological treatments at baseline
+13. A column containing information on pharmacological treatments at follow up
+14.	A column containing the psychiatric comorbidities of the participants
+15. A column containing the full-scale IQ score of the participants
 
 
 ## Rename columns 
@@ -33,6 +34,7 @@ Up to 14 columns will be required for the analysis. Here is the list:
 In bold, the name that should be given to the corresponding column
 
 + Participants identifier = **ID**
++ School level = **schoolyear**
 + Age at baseline = **agebaseline**
 + Age at Follow up = **agefollowup**
 + Follow up duration = **followupduration**
@@ -65,6 +67,7 @@ In order to recode your dataset automatically, we need to determine how you have
 In bold, the name that should be given to the corresponding values
 
 + Participants identifier = **no constraint** *You can identify your participants as you wish*
++ School level = **the school year of the children** *For example, if a child is in its first school year, his* **schoolyear** *value should be 1*
 + Age at baseline = **Age in years.** *For example, if a child was 8 years and 2 months at baseline, his* **"agebaseline"** *value should be: 8 + 2/12 =* **8.17**
 + Age at Follow up = **Age in years.** *For example, if a child was 11 years and 4 months at follow up, his* **"agefollowup"** *value should be: 11 + 4/12 =* **11.33**
 + Follow up duration = **Follow up in years.** *For example, if a child has a follow up duration of 5 years and 8 months, his* **followupduration** *value should be: 5 + 8/12 =* **5.67**
