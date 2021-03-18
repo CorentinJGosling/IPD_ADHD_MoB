@@ -24,7 +24,7 @@
 <meta name="author" content="Gosling CJ, Pinabiaux C, Caparos S, Delorme R &amp; Cortese S" />
 
 
-<meta name="date" content="2021-03-16" />
+<meta name="date" content="2021-03-18" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -122,7 +122,8 @@
 <p>Up to 15 columns will be required for the analysis. Here is the list:</p>
 <ol style="list-style-type: decimal">
 <li>A column containing the participant identifiers</li>
-<li>A column containing the academic level of the participants at baseline</li>
+<li>A column containing the month of the assessment at baseline</li>
+<li>A column containing the academic level / grade of the participants at baseline</li>
 <li>A column containing the age of participants at baseline</li>
 <li>A column containing the age of participants at follow up</li>
 <li>A column containing the follow up duration</li>
@@ -143,6 +144,7 @@
 <p>In bold, the name that should be given to the corresponding column</p>
 <ul>
 <li>Participants identifier = <strong>ID</strong></li>
+<li>Month of the assessment at baseline = <strong>assessmentdatebaseline</strong></li>
 <li>Academic level at baseline = <strong>schoolyearbaseline</strong></li>
 <li>Age at baseline = <strong>agebaseline</strong></li>
 <li>Age at Follow up = <strong>agefollowup</strong></li>
@@ -172,6 +174,7 @@
 <p>In bold, the name that should be given to the corresponding values</p>
 <ul>
 <li><p>Participants identifier = <strong>no constraint</strong> <em>You can identify your participants as you wish</em></p></li>
+<li><p>Month of the assessment at baseline = <strong>the month of the assessment at baseline.</strong> <em>For example, if a child was assessed the January 8th 1992 at baseline, </em> <strong>assessmentdatebaseline</strong> <em>value should be january</em></p></li>
 <li><p>Academic level at baseline = <strong>the school year of the children at baseline.</strong> <em>For example, if a child is in its first school year, his</em> <strong>schoolyearbaseline</strong> <em>value should be 1</em></p></li>
 <li><p>Age at baseline = <strong>Age in years.</strong> <em>For example, if a child was 8 years and 2 months at baseline, his</em> <strong>agebaseline</strong> <em>value should be: 8 + 2/12 =</em> <strong>8.17</strong></p></li>
 <li><p>Age at Follow up = <strong>Age in years.</strong> <em>For example, if a child was 11 years and 4 months at follow up, his</em> <strong>“agefollowup”</strong> <em>value should be: 11 + 4/12 =</em> <strong>11.33</strong></p></li>
